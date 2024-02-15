@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +10,9 @@ import { MenuItem } from 'primeng/api';
 export class NavComponent implements OnInit{
   items: MenuItem[]|undefined;
 
+  constructor( private readonly $auth: AuthService){
+     
+  }
 
   
   ngOnInit(): void {
@@ -29,6 +33,10 @@ export class NavComponent implements OnInit{
         routerLink: '/meetings/create'
       }
     ];
+  }
+
+  get isConnected(){
+    return this.$auth.isConnected;
   }
 
 

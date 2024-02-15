@@ -1,0 +1,60 @@
+<!--register form using user interface-->
+<div class="card flex justify-content-center">
+    <p-panel>
+        <p-toast></p-toast>
+        <ng-template pTemplate="header" class="justify-content-center">
+            <span class="text-secondary font-semibold text-xl ">Inscription en tant qu'indépendant</span>
+        </ng-template>
+        <div >
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="formgrid grid gap-2">
+                <div class="p-float-label field col">
+                    <input pInputText id="lastName" formControlName="lastName" class="w-full" />
+                    <label htmlFor="lastName">Nom</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="firstName" formControlName="firstName" class="w-full" />
+                    <label htmlFor="firstName">Prénom</label>
+                </div>
+                 <div class="p-float-label field col-12 ">
+                    <input pInputText id="email" formControlName="email" class="w-full"/>
+                    <label htmlFor="email">Email</label>
+                </div>
+                 <div class="p-float-label field col-12">
+                    <p-password id="password" formControlName="password" [feedback]="true" strongRegex [toggleMask]="true"></p-password>
+                    <label htmlFor="password">Mot de passe</label>
+                </div>
+                <div class="p-float-label field col-12"> 
+                    <input pInputText id="phoneNumber" formControlName="phoneNumber" class="w-full" />
+                    <label htmlFor="phoneNumber">Numero de téléphone</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="streetNumber" formControlName="streetNumber" />
+                    <label htmlFor="streetNumber">Numero de rue</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="street" formControlName="street" />
+                    <label htmlFor="street">Rue</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="zipCode" formControlName="zipCode" />
+                    <label htmlFor="zipCode">Code postal</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="city" formControlName="city" />
+                    <label htmlFor="city">Ville</label>
+                </div>
+                <div class="p-float-label field col ">
+                    <input pInputText id="country" formControlName="country" />
+                    <label htmlFor="country">Pays</label>
+                </div>
+                <div class="flex justify-content-center">
+                    <p-button label="Envoyer" type="submit" styleClass="p-button-secondary mt-4"></p-button>
+                </div>
+            </form>
+
+            
+        </div>
+        <button class="btn" (click)="preInsertData()">Pré-remplir le formulaire</button>
+    </p-panel>
+</div>
+
