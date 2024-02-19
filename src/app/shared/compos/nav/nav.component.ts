@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,9 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit{
+
   items: MenuItem[]|undefined;
 
-  constructor( private readonly $auth: AuthService){
+  constructor( private readonly $auth: AuthService, private readonly router : Router){
      
   }
 
@@ -37,6 +39,10 @@ export class NavComponent implements OnInit{
 
   get isConnected(){
     return this.$auth.isConnected;
+  }
+  logout() {
+    this.$auth.logout();
+    this.router.navigateByUrl('/login');
   }
 
 

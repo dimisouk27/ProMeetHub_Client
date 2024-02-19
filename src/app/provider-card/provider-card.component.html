@@ -1,16 +1,40 @@
-
 <div class="card flex justify-content-center">
-    <p-card header="Lama faché" subheader="Qui l'a faché? " [style]="{ width: '360px' }">
-        <ng-template pTemplate="header">
-            <img alt="Card" src="../../assets/lama.jpeg" />
-        </ng-template>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
-        </p>
-        <ng-template pTemplate="footer">
-            <p-button label="Save" icon="pi pi-check"></p-button>
-            <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
-        </ng-template>
-    </p-card>
+  <p-card
+    header="Lama faché"
+    subheader="Qui l'a faché? "
+    [style]="{ width: '360px' }"
+  >
+    <ng-template pTemplate="header">
+      <div class="flex align-items-center">
+        <p-avatar
+          image="../../assets/lama.jpeg"
+          styleClass="mx-3 mt-3"
+          size="xlarge"
+          shape="circle"
+        ></p-avatar>
+        <div><b>Fellaini Marouane</b></div>
+      </div>
+    </ng-template>
+    <p>
+      Il était une fois, dans une vallée éloignée, un lama du nom de Carl. Carl
+      était connu pour être le lama le plus zen de tout le troupeau. Il méditait
+      paisiblement, mastiquait de l'herbe avec sérénité et participait à des
+      cours de yoga lama pour rester en forme mentalement et physiquement.
+
+      <br /><br />Un jour, cependant, quelque chose perturba la quiétude de
+      Carl. Un groupe de moutons voisins envahit son terrain de pâturage
+      préféré, grignotant allègrement l'herbe sous son nez. Carl, d'ordinaire si
+      paisible, se mit soudainement à grogner et à froncer les sourcils. Il
+      était en mode "lama fâché".
+    </p>
+    <ng-template pTemplate="footer">
+      <p-button label="Save" icon="pi pi-check"></p-button>
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        styleClass="p-button-secondary"
+        [style]="{ 'margin-left': '.5em' }"
+      ></p-button>
+    </ng-template>
+  </p-card>
 </div>

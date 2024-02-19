@@ -1,14 +1,21 @@
 import { inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
+import { CanActivateFn, NavigationCancel, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import { tap } from "rxjs";
 
-export function authGuard(shouldBeConnected: boolean) : CanActivateFn {
+export function authGuard(shouldBeConnected: boolean, redirectPath: string = '/') : CanActivateFn {
     return (route, state): boolean => {
         const authService = inject(AuthService);
         const router = inject(Router); 
-        console.log(authService.isConnected)
-        if(authService.isConnected)
-            router.navigateByUrl("/")
-        return shouldBeConnected ? authService.isConnected : !authService.isConnected;
-    }
+
+        const isConnected = authService.isConnected;
+
+        if ((shouldBeConnected && isConnected) || (!shouldBeConnected && !isConnected)) {
+            return true; // Accès autorisé
+        } else {
+            // Rediriger vers la page spécifiée ou la page par défaut
+            router.navigate([redirectPath]);
+            return false;
+        }
+    };
 }

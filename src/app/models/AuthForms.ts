@@ -17,6 +17,11 @@ export interface IRegisterForm {//au cas ou on veux spécifier le champ où il y
     country: string;
 }
 
+export interface ILoginForm {
+    email: string;
+    password: string;
+}
+
 
 export const RegisterForm = {
     lastName : ['', [Validators.minLength(2), Validators.maxLength(50), Validators.required]],
@@ -30,4 +35,9 @@ export const RegisterForm = {
     city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
     country: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
     role: ['SERVICE_PROVIDER',[Validators.required]]
+}
+
+export const LoginForm = {
+    email: ['',[CustomValidators.emailValidator()]],
+    password: ['',[CustomValidators.password(8,255)]]
 }

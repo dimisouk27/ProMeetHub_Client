@@ -1,0 +1,26 @@
+<div class="card flex justify-content-center">
+    <p-panel>
+        <ng-template pTemplate="header" class="justify-content-center">
+            <span class="text-secondary font-semibold text-xl ">Connexion</span>
+        </ng-template>
+        <div >
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="formgrid grid gap-2">
+                 <div class="p-float-label field col-12 ">
+                    <input pInputText id="email" formControlName="email" class="w-full"/>
+                    <label htmlFor="email">Email</label>
+                </div>
+                 <div class="p-float-label field col-12">
+                    <p-password id="password" formControlName="password" [feedback]="true" strongRegex [toggleMask]="true"></p-password>
+                    <label htmlFor="password">Mot de passe</label>
+                </div>
+            
+                <div class="flex justify-content-center">
+                    <p-button label="Envoyer" type="submit" styleClass="p-button-secondary mt-4"></p-button>
+                </div>
+            </form>
+
+            
+        </div>
+        <button class="btn" (click)="preInsertData()">Pré-remplir le formulaire</button>
+    </p-panel>
+</div>
