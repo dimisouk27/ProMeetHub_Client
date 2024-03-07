@@ -1,0 +1,69 @@
+<div class="flex justify-content-center">
+  <form [formGroup]="serviceTypeForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+      <label class="col"  htmlFor="title">Titre</label>
+      <input pInputText pKeyFilter="alphanum" id="title" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" formControlName="title"/>
+  </div>
+  <div class="field">
+      <label class="col" htmlFor="description">Description</label>
+      <textarea pInputTextarea pKeyFilter="alphanum" id="description" rows="5" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" formControlName="description"></textarea>
+  </div>
+  <div class="field">
+      <label class="col mr-2" htmlFor="startDate">Date de début</label>
+      <p-calendar id="startDate" class="col" formControlName="startDate" dateFormat="dd-mm-yy" ></p-calendar>
+      <label class="col mr-2" htmlFor="endDate">Date de fin</label>
+      <p-calendar id="endDate" class="col" formControlName="endDate" dateFormat="dd-mm-yy" ></p-calendar>
+  </div>
+  <div class="field">
+      <label class="col" htmlFor="startTime">Heure de début</label>
+      <p-calendar
+      [timeOnly]="true"
+      [stepHour]="1"
+      [stepMinute]="15"
+      [defaultDate]="defaultStartTime"
+      class="col" formControlName="startTime"
+      ></p-calendar>
+      <label class="col" htmlFor="endTime">Heure de fin</label><p-calendar
+      [timeOnly]="true"
+      [stepHour]="1"
+      [stepMinute]="15"
+      [defaultDate]="defaultEndTime"
+      class="col" formControlName="endTime"
+    ></p-calendar>
+  </div>
+  <div class="field">
+      <label class="col" htmlFor="duration">Durée</label>
+      <div class="p-inputgroup col w-full">
+        <input pInputText pKeyFilter="num" id="duration" formControlName="duration"/>
+        <span class="p-inputgroup-addon">minutes</span>
+      </div>
+
+    </div>
+  <div class="field">
+    <label htmlFor="categoryName">La categorie de votre prestation</label>
+    <p-dropdown [options]="categories" formControlName="categoryName"  [showClear]="true" placeholder="Selectionez une catégorie ou ajoutez en une" styleClass="w-full"
+    [editable]="true" emptyMessage="Pas de catégorie trouvé, veuillez en ajouté une manuellement" pKeyFilter="alpha" (onFocus)="handleDropDown()" #catdropdown>
+    
+    </p-dropdown>
+  </div>
+  <div class="flex justify-content-center">
+    <p-button
+      label="Créer"
+      type="submit"
+      icon="pi pi-plus"
+      [text]="true"
+      [raised]="true"
+      severity="secondary"
+    ></p-button>
+</div>
+  </form>
+  <p-button
+  label="Pré-remplir"
+  type="submit"
+  icon="pi pi-check"
+  [text]="true"
+  [raised]="true"
+  severity="success"
+  (click)="preInsertData()"
+  ></p-button>
+</div>

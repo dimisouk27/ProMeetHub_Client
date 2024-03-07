@@ -4,25 +4,24 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, tap } from 'rxjs';
-import { LoginForm } from 'src/app/models/AuthForms';
-import { AuthService, IAuth } from 'src/app/services/auth.service';
+import { LoginForm, Role } from 'src/app/models/AuthForms';
+import { AuthService, IAuth } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnDestroy {
-
-  loginForm : FormGroup;
+  loginForm: FormGroup;
   private destroyed$ = new Subject();
 
   constructor(
-    private formBuilder : FormBuilder,
-    private readonly authService : AuthService,
-    private readonly messageService : MessageService,
+    private formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly messageService: MessageService,
     private readonly router: Router
-    ) {
+  ) {
     this.loginForm = formBuilder.group(LoginForm);
   }
   ngOnDestroy(): void {
@@ -30,36 +29,35 @@ export class LoginComponent implements OnDestroy {
   }
 
   onSubmit() {
-    if(this.loginForm.valid){
-      this.authService.login(this.loginForm.value)
-      .pipe(
-        takeUntil(this.destroyed$), // pour arrêter l'evenement si le composant est  détruit
-        tap(() => {
-          this.messageService.add({
-            severity: 'success',
-            summary: "Connexion réussie!",
-          })
-          this.router.navigateByUrl('/');
-        })
-      )
-      .subscribe({
-        next: () => {
-          this.loginForm.reset();
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: "Erreur de connexion",
-            detail: errorResponse.error.message,
-          });
-        },
-      });
+    if (this.loginForm.valid) {
+      this.authService
+        .login(this.loginForm.value)
+        .pipe(
+          takeUntil(this.destroyed$) // pour arrêter l'evenement si le composant est  détruit
+        )
+        .subscribe({
+          next: (response) => {
+            this.loginForm.reset();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Connexion réussie!',
+            }),
+              response.role == Role.SERVICE_PROVIDER
+                ? this.router.navigateByUrl('/service-provider')
+                : this.router.navigateByUrl('/');
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erreur de connexion',
+              detail: errorResponse.error.message,
+            });
+          },
+        });
     }
   }
   preInsertData() {
-    
     this.loginForm.controls['email'].setValue('John@Doe.com');
     this.loginForm.controls['password'].setValue('Test1234=');
   }
-
 }

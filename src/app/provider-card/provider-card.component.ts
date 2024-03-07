@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./provider-card.component.scss']
 })
 export class ProviderCardComponent {
-
+  imagePresent : boolean = false;
 }

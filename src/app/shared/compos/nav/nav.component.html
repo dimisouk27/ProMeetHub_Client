@@ -1,4 +1,4 @@
-<nav class="mb-4">
+<nav>
     <p-menubar [model]="items" >
         <ng-template pTemplate="start">
             <div class="flex flex-row align-items-center cursor-pointer" routerLink="/">
@@ -10,11 +10,12 @@
             </div>
         </ng-template>
         <ng-template pTemplate="end" >
-            <div class="flex align-items-center" ><p-button label="Se déconnecter" class="mr-2 w-11rem" (onClick)="logout()" styleClass="p-button-secondary" *ngIf="isConnected; else notConnected"></p-button>
-</div>
+            <div class="flex align-items-center" >
+                <p-button label="Se déconnecter" class="mr-2 w-11rem" (onClick)="logout()" styleClass="p-button-secondary" *ngIf="isConnected; else notConnected"></p-button>
+            </div>
         </ng-template>
         <ng-template #notConnected >
-            <p-button label="S'inscrire" class="mr-2" routerLink="/register" styleClass="p-button-secondary"></p-button>
+            <p-button label="S'inscrire" class="mr-2" routerLink="/register" styleClass="p-button-secondary" ></p-button>
             <p-button label="Se connecter" class="mr-2 w-10rem" routerLink="/login" styleClass="p-button-secondary"></p-button>
         </ng-template>
       </p-menubar>

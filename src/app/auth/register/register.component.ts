@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { RegisterForm } from '../../models/AuthForms';
-import { AuthService, IAuth } from '../../services/auth.service';
+import { RegisterForm, Role } from '../../models/AuthForms';
+import { AuthService, IAuth } from '../../services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -19,11 +19,11 @@ export class RegisterComponent implements OnDestroy {
     private formBuilder: FormBuilder,
     private readonly _authService: AuthService,
     public messageService: MessageService,
-    private readonly router: Router,
+    private readonly router: Router
   ) {
     this.registerForm = this.formBuilder.group(RegisterForm);
   }
-  
+
   ngOnDestroy(): void {
     this.destroyed$.complete();
   }
@@ -36,19 +36,19 @@ export class RegisterComponent implements OnDestroy {
         .register(this.registerForm.value)
         .pipe(
           //
-          takeUntil(this.destroyed$), // pour arrêter l'evenement si le composant est  détruit
-          tap(() => {
-            this.messageService.add({
-              severity: 'success',
-              summary: "Inscription réussie!",
-            })
-            this.router.navigateByUrl('/');
-          })
+          takeUntil(this.destroyed$) // pour arrêter l'evenement si le composant est  détruit
         )
         .subscribe({
           next: (response: IAuth) => {
             console.log('Utilisateur créé avec succès', response);
             this.registerForm.reset();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Inscription réussie!',
+            });
+            response.role == Role.SERVICE_PROVIDER
+              ? this.router.navigateByUrl('/service-provider')
+              : this.router.navigateByUrl('/');
           },
           error: (errorResponse: HttpErrorResponse) => {
             this.messageService.add({

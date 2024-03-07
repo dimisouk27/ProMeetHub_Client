@@ -1,0 +1,17 @@
+
+  <div class="flex justify-content-center align-items-baseline mb-4">
+    <p-avatar
+      [image]="imagePresent ? '../../assets/lama.jpeg':''"
+      [icon]="imagePresent ? '' : 'pi pi-user'"
+      styleClass="mx-3 mt-3"
+      size="xlarge"
+      shape="circle"
+    ></p-avatar>
+    <div><b>Fellaini Marouane</b></div>
+  </div>
+  <div class="grid">
+    <app-service-type
+    *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+    class="col-4">
+    </app-service-type>
+  </div>

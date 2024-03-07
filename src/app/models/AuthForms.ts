@@ -3,8 +3,14 @@
 import { Validators } from "@angular/forms";
 import { CustomValidators } from "../validators/customValidators";
 
+export enum Role {
+    ADMIN= "ADMIN",
+    SERVICE_PROVIDER = "SERVICE_PROVIDER",
+    CLIENT = "CLIENT"
+}
+
 export interface IRegisterForm {//au cas ou on veux spécifier le champ où il y a eu l'erreur 
-    role:  'ADMIN' |'SERVICE_PROVIDER' | 'CLIENT';
+    role: Role
     lastName: string;
     firstName: string;
     email: string;
@@ -34,7 +40,7 @@ export const RegisterForm = {
     zipCode: ['',[Validators.required, Validators.min(1), Validators.max(9999999999999999)]],
     city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
     country: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
-    role: ['SERVICE_PROVIDER',[Validators.required]]
+    role: [Role.SERVICE_PROVIDER, [Validators.required]]
 }
 
 export const LoginForm = {
