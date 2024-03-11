@@ -1,48 +1,34 @@
 <div class="card flex justify-content-center">
     <p-card
-      header="Type de service"
+      [header]="servicesType.title"
       [style]="{ width: '360px' }"
       class="service-card"
     >
-    <div class="flex align-items-center">
-      <span class="pi pi-clock"></span>
-      <p class="ml-2 mr-4">Durée</p>
-      <!-- Ce type de service est {{servicesType.enable ? "activé" : "désactivé"}}
-      <p-inputSwitch [trueValue]="servicesType.enable" ></p-inputSwitch> -->
+    <div class="flex justify-content-between">
+
+      <div class="flex align-items-center">
+        <span class="pi pi-clock"></span>
+        <p class="ml-2 mr-4">{{servicesType.duration}} min</p>
+      </div>
+      <form [formGroup]="form">
+        <div class="flex align-items-center">
+          <p class="mr-2">{{servicesType.enabled ? "Activé" : "Désactivé"}}</p>
+          <p-inputSwitch formControlName="enabled" (click)="submit()"></p-inputSwitch>
+        </div>
+      </form>
+
+      
     </div>
       
       <div class="h-16rem overflow-auto">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, delectus? Saepe maiores dolorum doloribus repellat. Quaerat inventore explicabo in neque minima sapiente aliquid nisi debitis, commodi rem, numquam ad accusantium?
-        Tempora temporibus ullam labore culpa ad debitis veniam officiis aliquam nihil totam, minima vel, saepe neque. Sed ducimus libero ea velit veniam, consectetur dolor suscipit incidunt laudantium quibusdam atque nulla.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est esse nostrum aspernatur tempore recusandae eligendi similique id fugiat assumenda perferendis vel at cupiditate, sunt quidem, ipsum a omnis, dolor atque!
-        Autem, aspernatur veritatis voluptatibus veniam molestias nemo iure libero esse porro dolore beatae maxime impedit molestiae cupiditate inventore tempora repudiandae alias distinctio sunt accusantium natus repellendus fuga eaque! Doloremque, voluptatibus!
-        Cum nihil perspiciatis ipsum perferendis non, ipsam maiores possimus consequatur? Eius earum labore a aut, cupiditate perferendis ipsa soluta saepe. Repudiandae praesentium cumque debitis cum quos possimus impedit fugit inventore!
-        Quidem modi laudantium vero enim ipsa provident neque dolore repellat praesentium culpa, maxime atque ut dolorem sed sequi illo, saepe nulla et aut consequuntur! Amet necessitatibus illo nemo exercitationem aut!
-        Debitis dolor aperiam obcaecati eaque asperiores officia similique placeat architecto ratione, consectetur numquam voluptas ut, labore alias minus laudantium. Aliquam dolor unde veritatis totam suscipit nobis. Velit libero ut enim!
-        Facere unde ex perferendis quidem magni quasi saepe impedit alias quae nobis vel illum aliquam facilis quaerat a nemo distinctio nulla eum quis totam, ipsum debitis iure quas! Deleniti, incidunt?
-        Recusandae quaerat officia illum sunt provident modi rerum possimus dolore nulla soluta, ad sint beatae inventore repudiandae explicabo facere dignissimos sequi! Praesentium aspernatur voluptatem sunt eligendi minima accusamus. Officia, deleniti.
-        Nulla similique at eligendi in, distinctio quidem, quo aliquid natus impedit aspernatur eveniet. Delectus maxime pariatur molestias veritatis blanditiis? Officia, unde cumque quasi cupiditate ab nemo facere reiciendis quis eveniet.
-        Totam dignissimos assumenda minima, tenetur eum placeat enim suscipit quos explicabo, delectus a aut accusamus et. Voluptatum illo, quis eum dolor in voluptatem perspiciatis vitae, cupiditate debitis aliquid maiores rerum.
-        Corrupti excepturi, dolores amet placeat repellendus ad dolor nulla, et ut a rerum possimus! A voluptate sapiente quidem veritatis, rem distinctio doloribus tempora nulla nisi temporibus corporis asperiores eveniet eaque.
-        Quos labore error sapiente, adipisci iste, quis quaerat molestiae laboriosam delectus, velit dolorum. Magnam perspiciatis quos maxime ducimus in. Modi vel totam non reiciendis at, inventore aperiam assumenda alias sed.
-        Ad, reiciendis deleniti? Non sit ullam mollitia. Adipisci repellendus, velit nesciunt laudantium amet facere quibusdam autem dignissimos quaerat iste, alias quae molestias quasi? Vero natus voluptate necessitatibus ab tempore cupiditate?
-        Animi, quas? Velit voluptatum iste nesciunt eum nisi doloremque, veritatis, praesentium rem vero atque aliquid esse laborum quos, minima quisquam dolore! Repellat ex deleniti molestias sed accusamus dolorem ipsam eveniet!
-        Magnam, doloribus. Quibusdam aliquid necessitatibus dolorem deleniti ducimus et voluptas alias nisi ad, quis distinctio delectus. Cum explicabo neque maxime omnis rem. Consectetur, necessitatibus. Quas nesciunt iste molestiae maxime debitis!
-        Hic dicta expedita necessitatibus neque eos quibusdam natus laudantium nulla, architecto autem voluptatem magnam commodi ipsa corporis voluptates rerum quam provident recusandae debitis minima impedit? Quo, quia! Dolores, ipsam aperiam.
-        Dolore non odit at debitis veritatis, placeat quis ex, accusantium, nesciunt ipsum numquam laudantium eveniet incidunt quos illo neque nisi aliquid. Autem cupiditate dolores at, aliquid quos quisquam repudiandae quas?
-        Commodi aperiam dicta eius maxime vitae reiciendis ea eveniet animi blanditiis iure minima odio, totam illum veritatis hic nam esse earum est ab vero labore laborum! Fugiat eveniet numquam labore.
-        Vel, maxime doloremque. Aliquam optio quo animi, nihil nisi vel similique earum mollitia quidem et perferendis veniam explicabo, dolore laboriosam! Ut suscipit repudiandae quos provident eos accusamus quod sequi maxime!
-        Explicabo reprehenderit reiciendis quod aperiam perferendis possimus porro, ducimus ipsam animi delectus sequi rem voluptates? Voluptatem, autem labore blanditiis sed explicabo vitae libero culpa quidem facilis vel. Aperiam, dolore. Praesentium!
-        Assumenda ea dolorem temporibus perferendis inventore qui tenetur dolor modi error officiis voluptatibus enim, nesciunt aliquam aut sit eius ipsa mollitia cum sunt voluptatem architecto repellendus excepturi? Similique, nulla perspiciatis.
+        {{servicesType.description}}
       </div>
 
       <ng-template pTemplate="footer">
         <div class="flex justify-content-between">
-          <p-button label="Modifier" severity="secondary" [outlined]="true" class="mr-2" icon="pi pi-angle-double-right" size="small" ></p-button>
-          <p-button label="Désactiver" severity="warning" [outlined]="true" class="mr-2" icon="pi pi-ban" size="small"></p-button>
-        </div>
-        <div class="flex justify-content-center mt-2">
+          <p-button label="Modifier" severity="info" [outlined]="true" icon="pi pi-angle-double-right" size="small" ></p-button>          
           <p-button label="Supprimer" severity="danger" [outlined]="true" icon ="pi pi-trash" size="small"></p-button><!-- mettre routerlink pour suppr modif desac, avec le titre car c'est unique -->
+
         </div>
       </ng-template>
     </p-card>

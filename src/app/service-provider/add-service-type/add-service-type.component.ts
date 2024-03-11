@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ServiceTypeComponent } from '../service-type/service-type.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Time } from '@angular/common';
@@ -6,7 +12,7 @@ import {
   ListboxChangeEvent,
   ListboxSelectAllChangeEvent,
 } from 'primeng/listbox';
-import { ServiceTypeForm } from 'src/app/models/ServiceTypeForm';
+import { ServiceTypeForm } from 'src/app/models/service_provider/ServiceTypeForm';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CustomValidators } from 'src/app/validators/customValidators';
 import { ProviderService } from 'src/app/services/provider/provider.service';
@@ -44,14 +50,13 @@ import { Dropdown } from 'primeng/dropdown';
 export class AddServiceTypeComponent implements OnInit, OnDestroy {
   @ViewChild('catdropdown') catdropdown!: Dropdown;
   handleDropDown() {
-  this.catdropdown.show();
-
-}
+    this.catdropdown.show();
+  }
 
   serviceTypeForm: FormGroup;
   categories: string[] = [];
-  defaultStartTime: Date = new  Date();
-  defaultEndTime: Date = new  Date();
+  defaultStartTime: Date = new Date();
+  defaultEndTime: Date = new Date();
   private destroyed$ = new Subject();
 
   constructor(
@@ -64,29 +69,28 @@ export class AddServiceTypeComponent implements OnInit, OnDestroy {
   ) {
     this.serviceTypeForm = formBuilder.group(
       { ...ServiceTypeForm },
-      {validators:CustomValidators.greaterThanValidator()}
-      
+      { validators: CustomValidators.greaterThanValidator() }
     );
 
     this.$serviceCategory.getAll().subscribe({
-      next:  (categories) => {
-        console.log("les categories récup: " + categories)
+      next: (categories) => {
+        console.log('les categories récup: ' + categories);
         this.categories = categories;
       },
       error: (errorResponse: HttpErrorResponse) => {
         this.messageService.add({
           severity: 'error',
-          summary: "Erreur lors de la récupération des catégories",
+          summary: 'Erreur lors de la récupération des catégories',
           detail: errorResponse.error.message,
         });
       },
-    })
+    });
   }
   ngOnInit(): void {
     this.defaultStartTime.setHours(8);
     this.defaultStartTime.setMinutes(0);
     this.defaultEndTime.setHours(16);
-    this.defaultEndTime.setMinutes(0)
+    this.defaultEndTime.setMinutes(0);
   }
 
   ngOnDestroy(): void {
@@ -97,14 +101,12 @@ export class AddServiceTypeComponent implements OnInit, OnDestroy {
     //verifier si login existe d'abord
     if (this.$auth.email != null) {
       this.serviceTypeForm.controls['login'].setValue(this.$auth.email);
-      console.log(this.serviceTypeForm)
+      console.log(this.serviceTypeForm);
       if (this.serviceTypeForm.valid) {
-        this.$providerService.addServiceType(this.serviceTypeForm.value)
-        .pipe(
-          takeUntil(this.destroyed$),
-        )
-        .subscribe(
-          {
+        this.$providerService
+          .addServiceType(this.serviceTypeForm.value)
+          .pipe(takeUntil(this.destroyed$))
+          .subscribe({
             next: (response: boolean) => {
               console.log('Type de service ajouté avec succès', response);
               this.serviceTypeForm.reset();
@@ -121,8 +123,7 @@ export class AddServiceTypeComponent implements OnInit, OnDestroy {
                 detail: errorResponse.error.message,
               });
             },
-          }
-        );
+          });
       }
     }
 
@@ -131,11 +132,17 @@ export class AddServiceTypeComponent implements OnInit, OnDestroy {
 
   preInsertData() {
     this.serviceTypeForm.controls['title'].setValue('NewTitle');
-    this.serviceTypeForm.controls['description'].setValue('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, delectus? Saepe maiores dolorum doloribus repellat. Quaerat inventore explicabo in neque minima sapiente aliquid nisi debitis, commodi rem, numquam ad accusantium? Tempora temporibus ullam labore culpa ad debitis veniam officiis aliquam nihil totam, minima vel, saepe neque. Sed ducimus libero ea velit veniam, consectetur dolor suscipit incidunt laudantium quibusdam atque nulla.');
-    this.serviceTypeForm.controls['startDate'].setValue(new Date(2024,2,20));
-    this.serviceTypeForm.controls['endDate'].setValue(new Date(2024,2,25));
-    this.serviceTypeForm.controls['startTime'].setValue(new Date(2024,2,20,8,0));
-    this.serviceTypeForm.controls['endTime'].setValue(new Date(2024,2,20,16,0));
+    this.serviceTypeForm.controls['description'].setValue(
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, delectus? Saepe maiores dolorum doloribus repellat. Quaerat inventore explicabo in neque minima sapiente aliquid nisi debitis, commodi rem, numquam ad accusantium? Tempora temporibus ullam labore culpa ad debitis veniam officiis aliquam nihil totam, minima vel, saepe neque. Sed ducimus libero ea velit veniam, consectetur dolor suscipit incidunt laudantium quibusdam atque nulla.'
+    );
+    this.serviceTypeForm.controls['startDate'].setValue(new Date(2024, 2, 20));
+    this.serviceTypeForm.controls['endDate'].setValue(new Date(2024, 2, 25));
+    this.serviceTypeForm.controls['startTime'].setValue(
+      new Date(2024, 2, 20, 8, 0)
+    );
+    this.serviceTypeForm.controls['endTime'].setValue(
+      new Date(2024, 2, 20, 16, 0)
+    );
     this.serviceTypeForm.controls['duration'].setValue(30);
   }
 }
